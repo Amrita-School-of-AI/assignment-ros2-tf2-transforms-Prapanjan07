@@ -11,11 +11,17 @@ find_package(rclcpp REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
-# TODO: Add the executable target named 'tf_broadcaster'
-# 1. Add executable using src/tf_broadcaster.cpp
-# 2. Add dependencies (ament_target_dependencies) for rclcpp, tf2_ros, geometry_msgs
-# 3. Install the target to the DESTINATION lib/${PROJECT_NAME}
+# Add the executable target named 'tf_broadcaster'
+add_executable(tf_broadcaster src/tf_broadcaster.cpp)
 
+# Add dependencies for rclcpp, tf2_ros, geometry_msgs
+ament_target_dependencies(tf_broadcaster rclcpp tf2_ros geometry_msgs)
+
+# Install the target
+install(TARGETS
+  tf_broadcaster
+  DESTINATION lib/${PROJECT_NAME})
+  
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
